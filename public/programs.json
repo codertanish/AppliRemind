@@ -1,0 +1,34 @@
+{
+  "ISEF": {
+    "programName": "ISEF",
+    "description": "International Science and Engineering Fair — the world’s largest international pre-college science competition.",
+    "url": "https://www.societyforscience.org/isef/",
+    "applicationDeadline": "2026/2/8",
+    "subject": "Science & Engineering",
+    "eligibility": "Grades 9–12"
+  },
+  "USACO": {
+    "programName": "USACO",
+    "description": "USA Computing Olympiad — a prestigious programming competition for high school students.",
+    "url": "http://www.usaco.org/",
+    "applicationDeadline": "Rolling (monthly contests)",
+    "subject": "Computer Science",
+    "eligibility": "Middle & High School"
+  },
+  "AMC": {
+    "programName": "AMC",
+    "description": "American Mathematics Competitions — a series of math contests that build problem-solving skills.",
+    "url": "https://www.maa.org/math-competitions",
+    "applicationDeadline": "October 2025",
+    "subject": "Mathematics",
+    "eligibility": "Grades 6–12"
+  },
+  "IRO": {
+    "programName": "IRO",
+    "description": "International Reseach Olympiad — a research-paper-based reasoning competition.",
+    "url": "https://www.internationalresearcholympiad.org/",
+    "applicationDeadline": "2026/2/8",
+    "subject": "Mathematics",
+    "eligibility": "Grades 9-12"
+  }
+}

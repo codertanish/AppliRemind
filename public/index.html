@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Academic & STEM Programs</title>
+  <link rel = "stylesheet" href = "output.css">
+   <script src = "app.js" defer></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans flex flex-col min-h-screen">
+
+<header class="bg-blue-600 text-white py-8 shadow-md">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <h1 
+      class="text-4xl font-extrabold tracking-tight transition-colors duration-300"
+    >
+      Academic & STEM Programs
+    </h1>
+    <p 
+      class="text-base mt-2 text-white transition-colors duration-300"
+    >
+      Explore top competitions and initiatives for curious minds
+    </p>
+  </div>
+</header>
+
+  <main class="flex-grow max-w-8xl mx-auto px-4 py-10">
+    <div id="programGrid" class="grid gap-6 md:grid-cols-2 lg:grid-cols-4"></div>
+  </main>
+
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+    <div class="bg-white p-6 rounded-lg max-w-md w-full shadow-lg relative">
+      <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+      <h2 id="modalTitle" class="text-2xl font-bold mb-2"></h2>
+      <p id="modalDescription" class="mb-2 text-gray-700"></p>
+      <p class="text-sm text-gray-600"><strong>Deadline:</strong> <span id="modalDeadline"></span></p>
+      <p class="text-sm text-gray-600"><strong>Subject:</strong> <span id="modalSubject"></span></p>
+      <p class="text-sm text-gray-600 mb-4"><strong>Eligibility:</strong> <span id="modalEligibility"></span></p>
+      <a id="modalLink" href="#" target="_blank" class="text-blue-600 hover:underline">Visit Program Website</a>
+      <form id="notifyForm" class="space-y-4 mt-4">
+  <div>
+    <h1 class = "block text-lg font-medium text-gray-700 mb-1">Remind Me:</h2>
+    <label for="emailInput" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+    <input
+      type="email"
+      id="emailInput"
+      required
+      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+    />
+  </div>
+
+  <div>
+    <label for="delaySelect" class="block text-sm font-medium text-gray-700 mb-1">Notify Me</label>
+    <select
+      id="delaySelect"
+      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+    >
+      <option value="1">📅 One Month Before</option>
+      <option value="2">📆 One Week Before</option>
+      <option value="3">🚀 When It Opens</option>
+    </select>
+  </div>
+
+  <div class="flex justify-end space-x-2 pt-2">
+    <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition">Cancel</button>
+    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Submit</button>
+  </div>
+</form>
+
+    </div>
+  </div>
+
+  <footer class="bg-gray-100 text-center py-4 mt-10 ">
+<p class="text-center text-sm text-gray-500 italic">
+  Developed by 
+  <a 
+    href="https://github.com/codertanish" 
+    target="_blank" 
+    class="relative font-medium text-gray-700 hover:text-blue-600 transition-colors duration-300 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:scale-x-0 after:bg-blue-500 after:origin-left hover:after:scale-x-100 after:transition-transform after:duration-300"
+  >
+    CoolCoderTR
+  </a>
+</p>
+
+
+
+  <script>
+    let currProgram = "";
+    async function loadPrograms() {
+      const response = await fetch('../programs.json');
+      const data = await response.json();
+      const grid = document.getElementById("programGrid");
+
+      Object.entries(data).forEach(([id, program]) => {
+        const block = document.createElement("div");
+        block.className = "bg-white border border-gray-200 p-6 rounded-lg shadow hover:shadow-md transition";
+        block.innerHTML = `
+         <a
+        href=${program.url}
+        target="_blank"
+        class="text-black-600 hover:text-blue-800 font-semibold text-lg transition duration-200 ease-in-out">
+        ${program.programName} </a>
+          <p class="mb-3">${program.description}</p>
+          <button onclick='openModal(${JSON.stringify(program).replace(/"/g, "&quot;")})' class="inline-block px-4 py-2 bg-blue-600 text-white font-medium rounded-md shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 transition"> Expand </button>
+        `;
+        grid.appendChild(block);
+      });
+    }
+
+    function openModal(data) {
+    currProgram = data.programName;
+      document.getElementById("modalTitle").textContent = data.programName;
+      document.getElementById("modalDescription").textContent = data.description;
+      document.getElementById("modalDeadline").textContent = data.applicationDeadline;
+      document.getElementById("modalSubject").textContent = data.subject;
+      document.getElementById("modalEligibility").textContent = data.eligibility;
+      document.getElementById("modalLink").href = data.url;
+      document.getElementById("modal").classList.remove("hidden");
+    }
+
+    function closeModal() {
+      document.getElementById("modal").classList.add("hidden");
+    }
+
+    loadPrograms();
+  </script>
+
+</body>
+</html>
