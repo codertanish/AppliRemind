@@ -5,31 +5,37 @@ fetch('../programs.json')
   .then(data => {
     programs = data;
   });
-fetch('/config')
-  .then(res => res.json())
-  .then(data => {
-    scriptURL = data.scriptURL;
+
+async function submit(formData) {
+  try {
+    const response = await fetch('/submit-program', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+
+    const result = await response.text();
+    console.log('Submission successful:', result);
+  } catch (err) {
+    console.error('Submission failed:', err);
+  }
+}
+document.getElementById("notifyForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = document.getElementById("emailInput").value.trim();
+  const delay = document.getElementById("delaySelect").value;
+
+  if (!email) return;
+
+  await submit({
+    email,
+    programID: currProgram,
+    delay,
+    deadline: programs[currProgram].applicationDeadline,
+    url: programs[currProgram].url
   });
 
+  closeModal();
+  alert("✅ You’ll be notified!");
 
-document.getElementById("notifyForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const email = document.getElementById("emailInput").value.trim();
-      const delay = document.getElementById("delaySelect").value;
-
-      if (!email) return;
-
-      await fetch(scriptURL, {
-        method: "POST",
-        body: new URLSearchParams({
-          email,
-          programID: currProgram,
-          delay,
-          deadline: programs[currProgram].applicationDeadline,
-          url: programs[currProgram].url
-        })
-      });
-
-      closeModal();
-      alert("✅ You’ll be notified!");
-    });
+});
