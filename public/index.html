@@ -7,47 +7,141 @@
   <title>Academic & STEM Programs</title>
   <link rel="stylesheet" href="output.css">
   <script src="app.js" defer></script>
+  <style>
+    .fade-in {
+      animation: fadeInScale 0.25s ease-out forwards;
+    }
+
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .underline-hover {
+      position: relative;
+      display: inline-block;
+    }
+
+    .underline-hover::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 2px;
+      background-color: currentColor;
+      transition: width 0.3s ease;
+    }
+
+    .underline-hover:hover::after {
+      width: 100%;
+    }
+
+    #filterWrapper.active {
+      right: 320px;
+    }
+
+    #filterPanel.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #filterToggle.rotated {
+      transform: rotate(45deg);
+      /* visual cue, like "close" icon */
+    }
+  </style>
 </head>
 
-<body class="bg-gray-50 text-gray-900 font-sans flex flex-col min-h-screen">
+<body
+  class="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 text-gray-900 font-sans flex flex-col min-h-screen">
 
-  <header class="bg-blue-600 text-white py-8 shadow-md">
+  <header class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-10 shadow-xl">
     <div class="max-w-4xl mx-auto px-6 text-center">
-      <h1 class="text-4xl font-extrabold tracking-tight transition-colors duration-300">
+      <h1 class="text-5xl font-extrabold tracking-tight drop-shadow-xl transition-colors duration-300">
         Academic & STEM Programs
       </h1>
-      <p class="text-base mt-2 text-white transition-colors duration-300">
+      <p class="text-lg mt-4 text-white/90">
         Explore top competitions and initiatives for curious minds
       </p>
     </div>
   </header>
 
   <main class="flex-grow max-w-8xl mx-auto px-4 py-10">
-    <div id="programGrid" class="grid gap-6 md:grid-cols-2 lg:grid-cols-4"></div>
+    <div class="relative w-full h-full">
+
+      <div id="filterWrapper" class="fixed z-40 transition-all duration-500 bottom-6 right-6">
+        <button id="filterToggle"
+          class="p-4 bg-gradient-to-br from-purple-500 to-blue-500 text-white text-xl rounded-full shadow-xl
+             hover:scale-105 hover:shadow-2xl hover:ring-4 hover:ring-purple-300 transition-all duration-500 focus:outline-none">
+          <span class="sr-only"></span>
+          <svg aria-hidden="true" focusable="false" class="icon" xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512" width="1em" height="1em">
+            <path fill="currentColor"
+              d="M487.9 0H24.1C10.8 0 0 10.8 0 24.1v39.8c0 6.4 2.5 12.5 7 17.1L192 256v184.4c0 9.5 7.7 17.2 17.2 17.2h93.6c9.5 0 17.2-7.7 17.2-17.2V256l185-175c4.5-4.6 7-10.7 7-17.1V24.1C512 10.8 501.2 0 487.9 0z" />
+          </svg>
+
+        </button>
+
+        <div id="filterPanel" class="absolute opacity-0 pointer-events-none backdrop-blur-md
+         bg-gradient-to-r from-purple-50 to-blue-50 px-6 py-4 rounded-lg shadow-lg border border-purple-200
+         transition-all duration-500 max-w-xs w-[300px] bottom-0 right-0">
+
+          <button id="filterToggleActive" class="absolute top-4 left-4 p-2 bg-gradient-to-br from-red-500 to-purple-500 text-white rounded-full shadow-xl
+           transition-all duration-500 focus:outline-none hover:ring-4 hover:ring-red-300 hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 pointer-events-none text-gray-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+</svg>
+          </button>
+          <div class="mb-4 flex flex-col gap-4 mt-12">
+            <label for="subjectFilter" class="text-base font-semibold text-gray-800">Category</label>
+            <select id="subjectFilter" class="px-4 py-3 pr-10 border border-gray-300 rounded-lg bg-white text-sm text-gray-800
+               focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all shadow-sm appearance-none">
+              <option value="">All Categories</option>
+            </select>
+            <div id="resultCount" class="text-base font-medium text-gray-700 tracking-wide"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div id="programGrid" class="grid gap-8 md:grid-cols-2 lg:grid-cols-4"></div>
   </main>
 
-  <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-    <div class="bg-white p-6 rounded-lg max-w-md w-full shadow-lg relative">
+  <div id="modal"
+    class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center hidden z-50">
+    <div class="bg-white p-6 rounded-xl max-w-md w-full shadow-2xl relative fade-in">
       <button onclick="closeModal()"
-        class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-xl">&times;</button>
-      <h2 id="modalTitle" class="text-2xl font-bold mb-2"></h2>
-      <p id="modalDescription" class="mb-2 text-gray-700"></p>
+        class="absolute top-2 right-2 text-gray-400 hover:text-gray-600 text-2xl transition-colors">&times;</button>
+      <h2 id="modalTitle" class="text-2xl font-bold mb-3"></h2>
+      <p id="modalDescription" class="mb-3 text-gray-700"></p>
       <p class="text-sm text-gray-600"><strong>Deadline:</strong> <span id="modalDeadline"></span></p>
-      <p class="text-sm text-gray-600"><strong>Subject:</strong> <span id="modalSubject"></span></p>
+      <p class="text-sm text-gray-600"><strong>Subject(s):</strong> <span id="modalSubject"></span></p>
       <p class="text-sm text-gray-600 mb-4"><strong>Eligibility:</strong> <span id="modalEligibility"></span></p>
-      <a id="modalLink" href="#" target="_blank" class="text-blue-600 hover:underline">Visit Program Website</a>
-      <form id="notifyForm" class="space-y-4 mt-4">
+      <a id="modalLink" href="#" target="_blank" class="text-blue-600 underline-hover">Visit Program Website</a>
+
+      <form id="notifyForm" class="space-y-4 mt-6">
         <div>
-          <h1 class="block text-lg font-medium text-gray-700 mb-1">Remind Me:</h2>
-            <label for="emailInput" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-            <input type="email" id="emailInput" required
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <h1 class="block text-lg font-medium text-gray-700 mb-1">Remind Me:</h1>
+          <label for="emailInput" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+          <input type="email" id="emailInput" required
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition">
         </div>
 
         <div>
           <label for="delaySelect" class="block text-sm font-medium text-gray-700 mb-1">Notify Me</label>
           <select id="delaySelect"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition">
             <option value="1">📅 One Month Before</option>
             <option value="2">📆 One Week Before</option>
             <option value="3">🚀 When It Opens</option>
@@ -56,16 +150,15 @@
 
         <div class="flex justify-end space-x-2 pt-2">
           <button type="button" onclick="closeModal()"
-            class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition">Cancel</button>
+            class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 active:scale-95 transition-transform">Cancel</button>
           <button type="submit"
-            class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Submit</button>
+            class="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded hover:scale-105 hover:shadow-lg active:scale-95 transition-transform">Submit</button>
         </div>
       </form>
-
     </div>
   </div>
 
-  <footer class="bg-gray-100 text-center py-4 mt-10 ">
+  <footer class="bg-gray-100 text-center py-4 mt-10">
     <p class="text-center text-sm text-gray-500 italic">
       Developed by
       <a href="https://github.com/codertanish" target="_blank"
@@ -73,49 +166,150 @@
         CoolCoderTR
       </a>
     </p>
+  </footer>
+
+  <script>
+
+    let currProgram = "";
+    let programsData = {};
+
+    function daysUntil(deadline) {
+      const end = new Date(deadline);
+      if (isNaN(end.getTime())) return null;
+      const today = new Date();
+      return Math.ceil((end - today) / (1000 * 60 * 60 * 24));
+    }
+
+    function getUniqueSubjects(data) {
+      const allCats = Object.values(data).flatMap(p => p.subjects || []);
+      return [...new Set(allCats)].sort();
+    }
+
+    function setResultCount(count) {
+      const el = document.getElementById("resultCount");
+      el.textContent = count === 1 ? "Showing 1 program" : `Showing ${count} programs`;
+    }
+
+    function renderPrograms(data, selectedCategory = "") {
+      const grid = document.getElementById("programGrid");
+      grid.innerHTML = "";
+
+      const entries = Object.entries(data).filter(([_, program]) => {
+        return !selectedCategory || (program.subjects || []).includes(selectedCategory);
+      });
+
+      entries.forEach(([id, program]) => {
+        const days = daysUntil(program.applicationDeadline);
+
+        let badgeColor = "bg-green-200 text-green-800";
+        let badgeLabel = "";
+        if (days === null) {
+          badgeColor = "bg-blue-200 text-blue-800";
+          badgeLabel = "Rolling";
+        } else if (days < 0) {
+          badgeColor = "bg-gray-200 text-gray-800";
+          badgeLabel = "Closed";
+        } else if (days <= 7) {
+          badgeColor = "bg-red-200 text-red-800";
+          badgeLabel = `${days} days left`;
+        } else if (days <= 14) {
+          badgeColor = "bg-yellow-200 text-yellow-800";
+          badgeLabel = `${days} days left`;
+        } else {
+          badgeLabel = `${days} days left`;
+        }
+
+        const categoryTags = (program.subjects || [])
+          .map(cat => `<span class="text-xs px-2 py-1 mr-1 rounded bg-gray-100 text-gray-700">${cat}</span>`)
+          .join("");
+
+        const block = document.createElement("div");
+        block.className = "bg-white border border-gray-200 p-6 rounded-lg shadow-md transform transition hover:scale-105 hover:shadow-xl hover:-translate-y-1";
+        block.innerHTML = `
+      <div class="flex justify-between items-center mb-3">
+        <a href="${program.url}" target="_blank"
+          class="text-black font-semibold text-lg underline-hover">
+          ${program.programName}
+        </a>
+        <span class="px-3 py-1 rounded-full text-sm font-medium ${badgeColor}">
+          ${badgeLabel}
+        </span>
+      </div>
+      <p class="mt-1 mb-4 text-gray-600">${program.description}</p>
+      <div class="flex items-center justify-between">
+        <div class="flex flex-wrap mb-4">${categoryTags}</div>
+        <button onclick='openModal(${JSON.stringify(program).replace(/"/g, "&quot;")})'
+          class="inline-block px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-md shadow hover:scale-105 hover:shadow-lg active:scale-95 transition-transform">
+          Expand
+        </button>
+      </div>
+    `;
+        grid.appendChild(block);
+      });
+
+      setResultCount(entries.length);
+    }
+
+    async function loadPrograms() {
+      const response = await fetch('../programs.json');
+      programsData = await response.json();
+
+      const subjectSelect = document.getElementById("subjectFilter");
+      const subjects = getUniqueSubjects(programsData);
+      subjects.forEach(cat => {
+        const opt = document.createElement("option");
+        opt.value = cat;
+        opt.textContent = cat;
+        subjectSelect.appendChild(opt);
+      });
+
+      renderPrograms(programsData, "");
+
+      subjectSelect.addEventListener("change", (e) => {
+        renderPrograms(programsData, e.target.value);
+      });
+    }
+
+
+    function openModal(data) {
+      currProgram = data.programName;
+      document.getElementById("modalTitle").textContent = data.programName;
+      document.getElementById("modalDescription").textContent = data.description;
+      document.getElementById("modalDeadline").textContent = data.applicationDeadline;
+      document.getElementById("modalSubject").textContent = data.subjects;
+      document.getElementById("modalEligibility").textContent = data.eligibility;
+      document.getElementById("modalLink").href = data.url;
+      document.getElementById("modal").classList.remove("hidden");
+    }
+
+    function closeModal() {
+      document.getElementById("modal").classList.add("hidden");
+    }
+
+    const wrapper = document.getElementById("filterWrapper");
+    const panel = document.getElementById("filterPanel");
+    const toggle = document.getElementById("filterToggle");
+    const toggleActive = document.getElementById("filterToggleActive");
+
+    toggle.addEventListener("click", () => {
+      panel.classList.remove("opacity-0", "pointer-events-none");
+      panel.classList.add("opacity-100", "pointer-events-auto");
+      toggle.classList.add("hidden");
+      toggleActive.classList.remove("hidden");
+    });
+
+    toggleActive.addEventListener("click", () => {
+      panel.classList.remove("opacity-100", "pointer-events-auto");
+      panel.classList.add("opacity-0", "pointer-events-none");
+      toggle.classList.remove("hidden");
+      toggleActive.classList.add("hidden");
+    });
 
 
 
-    <script>
-      let currProgram = "";
-      async function loadPrograms() {
-        const response = await fetch('../programs.json');
-        const data = await response.json();
-        const grid = document.getElementById("programGrid");
 
-        Object.entries(data).forEach(([id, program]) => {
-          const block = document.createElement("div");
-          block.className = "bg-white border border-gray-200 p-6 rounded-lg shadow hover:shadow-md transition";
-          block.innerHTML = `
-         <a
-        href=${program.url}
-        target="_blank"
-        class="text-black-600 hover:text-blue-800 font-semibold text-lg transition duration-200 ease-in-out">
-        ${program.programName} </a>
-          <p class="mb-3">${program.description}</p>
-          <button onclick='openModal(${JSON.stringify(program).replace(/"/g, "&quot;")})' class="inline-block px-4 py-2 bg-blue-600 text-white font-medium rounded-md shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 transition"> Expand </button>
-        `;
-          grid.appendChild(block);
-        });
-      }
-
-      function openModal(data) {
-        currProgram = data.programName;
-        document.getElementById("modalTitle").textContent = data.programName;
-        document.getElementById("modalDescription").textContent = data.description;
-        document.getElementById("modalDeadline").textContent = data.applicationDeadline;
-        document.getElementById("modalSubject").textContent = data.subject;
-        document.getElementById("modalEligibility").textContent = data.eligibility;
-        document.getElementById("modalLink").href = data.url;
-        document.getElementById("modal").classList.remove("hidden");
-      }
-
-      function closeModal() {
-        document.getElementById("modal").classList.add("hidden");
-      }
-
-      loadPrograms();
-    </script>
+    loadPrograms();
+  </script>
 
 </body>
 

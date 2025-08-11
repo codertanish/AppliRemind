@@ -22,6 +22,7 @@ async function submit(formData) {
 }
 document.getElementById("notifyForm").addEventListener("submit", async (e) => {
   e.preventDefault();
+  //if(programs[currProgram])
   const email = document.getElementById("emailInput").value.trim();
   const delay = document.getElementById("delaySelect").value;
 

@@ -1,34 +1,154 @@
 {
-  "ISEF": {
-    "programName": "ISEF",
-    "description": "International Science and Engineering Fair — the world’s largest international pre-college science competition.",
-    "url": "https://www.societyforscience.org/isef/",
-    "applicationDeadline": "2026/2/8",
-    "subject": "Science & Engineering",
+  "MIT THINK": {
+    "programName": "MIT THINK",
+    "description": "MIT THINK Scholars Program — a national STEM research competition for U.S. high school students. Finalists receive mentorship, funding, and an all-expenses-paid trip to MIT.",
+    "url": "https://think.mit.edu/",
+    "applicationDeadline": "2025-01-01",
+    "subjects": ["Research"],
+    "eligibility": "Grades 9–12 (U.S.)"
+  },
+  "RSI": {
+    "programName": "RSI",
+    "description": "Research Science Institute — a prestigious 6-week research internship hosted at MIT combining coursework and lab research for top high school students.",
+    "url": "https://www.cee.org/apply-to-rsi",
+    "applicationDeadline": "2025-01-15",
+    "subjects": ["Research"],
+    "eligibility": "Grade 11"
+  },
+  "MIT PRIMES": {
+    "programName": "MIT PRIMES",
+    "description": "MIT PRIMES — year-long mentored research program in math and computer science for high school students. Includes remote option: PRIMES-USA.",
+    "url": "https://math.mit.edu/research/highschool/primes/",
+    "applicationDeadline": "2024-12-01",
+    "subjects": ["Mathematics"],
+    "eligibility": "Grades 9–12"
+  },
+  "ILO": {
+    "programName": "ILO",
+    "description": "International Logic Olympiad — global competition hosted by Stanford testing logical reasoning and proof-solving ability. Includes online prelims and in-person finals.",
+    "url": "https://www.logicolympiad.org/",
+    "applicationDeadline": "2025-03-01",
+    "subjects": ["English"],
     "eligibility": "Grades 9–12"
   },
   "USACO": {
     "programName": "USACO",
-    "description": "USA Computing Olympiad — a prestigious programming competition for high school students.",
+    "description": "USA Computing Olympiad — national programming contests testing algorithmic problem-solving, leading to camp and IOI team selection.",
     "url": "http://www.usaco.org/",
-    "applicationDeadline": "Rolling (monthly contests)",
-    "subject": "Computer Science",
-    "eligibility": "Middle & High School"
-  },
-  "AMC": {
-    "programName": "AMC",
-    "description": "American Mathematics Competitions — a series of math contests that build problem-solving skills.",
-    "url": "https://www.maa.org/math-competitions",
-    "applicationDeadline": "October 2025",
-    "subject": "Mathematics",
+    "applicationDeadline": "2025-12-13",
+    "subjects": ["Computer Science"],
     "eligibility": "Grades 6–12"
   },
-  "IRO": {
-    "programName": "IRO",
-    "description": "International Reseach Olympiad — a research-paper-based reasoning competition.",
-    "url": "https://www.internationalresearcholympiad.org/",
-    "applicationDeadline": "2026/2/8",
-    "subject": "Mathematics",
-    "eligibility": "Grades 9-12"
+  "AIME": {
+    "programName": "AIME",
+    "description": "American Invitational Mathematics Examination — selective 15-question exam for top AMC scorers, prerequisite for USAMO/USAJMO.",
+    "url": "https://www.maa.org/math-competitions/aime",
+    "applicationDeadline": "2026-03-18",
+    "subjects": ["Mathematics"],
+    "eligibility": "Grades 12 and below"
+  },
+  "USAJMO": {
+    "programName": "USAJMO",
+    "description": "USA Junior Mathematical Olympiad — proof-based exam for high school students qualifying through AMC10 and AIME.",
+    "url": "https://www.maa.org/math-competitions/usa-jmo",
+    "applicationDeadline": "2026-04-22",
+    "subjects": ["Mathematics"],
+    "eligibility": "Grades 10 and below"
+  },
+  "USAMO": {
+    "programName": "USAMO",
+    "description": "USA Mathematical Olympiad — national proof-based competition for high scorers on AMC12 and AIME; pathway to IMO team.",
+    "url": "https://www.maa.org/math-competitions/usamo",
+    "applicationDeadline": "2026-04-22",
+    "subjects": ["Mathematics"],
+    "eligibility": "Grades 12 and below"
+  },
+  "SSP": {
+    "programName": "SSP",
+    "description": "Summer Science Program — immersive residential research program with tracks in astrophysics and biochemistry; students complete real-world investigations.",
+    "url": "https://summerscience.org/",
+    "applicationDeadline": "2025-02-01",
+    "subjects": ["Research"],
+    "eligibility": "Grades 10–11"
+  },
+  "Simons SRP": {
+    "programName": "Simons SRP",
+    "description": "Simons Summer Research Program — mentored lab internships at Stony Brook University across biology, physics, chemistry, and engineering.",
+    "url": "https://www.stonybrook.edu/simons-srp/",
+    "applicationDeadline": "2025-01-10",
+    "subjects": ["Research"],
+    "eligibility": "Grade 11"
+  },
+  "NACLO": {
+    "programName": "NACLO",
+    "description": "North American Computational Linguistics Open competition — linguistics-based puzzles exploring language and data structure; leads to invitational rounds.",
+    "url": "https://naclo.org/",
+    "applicationDeadline": "2025-01-01",
+    "subjects": ["English"],
+    "eligibility": "Grades 6–12"
+  },
+  "USABO": {
+    "programName": "USABO",
+    "description": "USA Biology Olympiad — national bio exam sequence with theory and lab work, leading to IBO team selection.",
+    "url": "https://www.usabo-trc.org/",
+    "applicationDeadline": "2025-01-15",
+    "subjects": ["Biology"],
+    "eligibility": "Grades 9–12"
+  },
+  "USNCO": {
+    "programName": "USNCO",
+    "description": "USA Chemistry Olympiad — rigorous theory and lab exams leading to international representation at IChO.",
+    "url": "https://www.acs.org/education/olympiad.html",
+    "applicationDeadline": "2025-02-01",
+    "subjects": ["Chemistry"],
+    "eligibility": "Grades 9–12"
+  },
+  "USAPhO": {
+    "programName": "USAPhO",
+    "description": "USA Physics Olympiad — exams and training camps leading to IPhO team selection; starts with the F=ma exam.",
+    "url": "https://www.aapt.org/physicsteam/",
+    "applicationDeadline": "2025-01-18",
+    "subjects": ["Physics"],
+    "eligibility": "Grades 9–12"
+  },
+  "MIT BWSI": {
+    "programName": "MIT BWSI",
+    "description": "MIT Beaver Works Summer Institute — advanced summer tracks in autonomy, AI, and cybersecurity. Open to rising seniors who complete online prep.",
+    "url": "https://bwsi.mit.edu/",
+    "applicationDeadline": "2025-01-31",
+    "subjects": ["Computer Science"],
+    "eligibility": "Grade 11 (rising seniors)"
+  },
+  "Mathcamp": {
+    "programName": "Mathcamp",
+    "description": "Canada/USA Mathcamp — a 5-week summer experience for mathematically talented youth with deep dives into advanced topics and problem solving.",
+    "url": "https://www.mathcamp.org/",
+    "applicationDeadline": "2025-03-15",
+    "subjects": ["Mathematics"],
+    "eligibility": "Ages 13–18"
+  },
+  "PROMYS": {
+    "programName": "PROMYS",
+    "description": "Program in Mathematics for Young Scientists — 6-week number theory exploration hosted at Boston University, emphasizing rigor and discovery.",
+    "url": "https://promys.org/",
+    "applicationDeadline": "2025-03-01",
+    "subjects": ["Mathematics"],
+    "eligibility": "Grades 9–12"
+  },
+  "REGEN STS": {
+    "programName": "Regneron STS",
+    "description": "Regeneron Science Talent Search — premier independent research competition for U.S. high school seniors; projects judged at the national level.",
+    "url": "https://www.societyforscience.org/regeneron-sts/",
+    "applicationDeadline": "2025-11-06",
+    "subjects": ["Research"],
+    "eligibility": "Grade 12 (U.S.)"
+  },
+  "Conrad Challenge": {
+    "programName": "Conrad Challenge",
+    "description": "Global innovation competition where student teams create market-ready STEM solutions and present at the Innovation Summit.",
+    "url": "https://www.conradchallenge.org/",
+    "applicationDeadline": "2025-11-01",
+    "subjects": ["Research"],
+    "eligibility": "Ages 13–18 (teams)"
   }
 }
